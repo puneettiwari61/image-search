@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import useDebounce from "./components/common/debounce";
+import SearchBar from "./components/SearchBar";
+import ImageList from "./components/ImageList";
+import DisplayImage from "./components/DisplayImage";
+import { ImageDataProvider } from "./components/context/images";
+import "./App.css";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState();
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  let location = useLocation();
+  let { state } = location;
+
+  const handleOnSearch = (e) => setSearchTerm(e.target.value);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ImageDataProvider>
+      <div className="App h-screen">
+        <SearchBar handleOnSearch={handleOnSearch} />
+        <Routes location={state?.backgroundLocation || location}>
+          <Route
+            path="/"
+            exact
+            element={
+              <ImageList
+                searchTerm={searchTerm}
+                debouncedSearchTerm={debouncedSearchTerm}
+              />
+            }
+          />
+        </Routes>
+        <Routes>
+          <Route path="/img/:id" element={<DisplayImage />} />
+        </Routes>
+      </div>
+    </ImageDataProvider>
   );
 }
 
