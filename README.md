@@ -17,7 +17,7 @@
 
 ## Run Project
 
-Clone th eproject and in the project directory, you can run:
+Clone the project and in the project directory, you can run:
 
 Insatll dependencies with
 
