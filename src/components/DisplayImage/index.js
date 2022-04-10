@@ -4,7 +4,6 @@ import "@reach/dialog/styles.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useImageDataState } from "../context/images";
 
-
 const DisplayImage = () => {
   const { defaultPicsArray, searchedPicsArray } = useImageDataState();
   const [currentPic, setCurrentPic] = useState();
@@ -14,9 +13,9 @@ const DisplayImage = () => {
 
   useEffect(() => {
     if (defaultPicsArray.length) {
-      setCurrentPic(defaultPicsArray.find((pic) => pic.id == id));
+      setCurrentPic(defaultPicsArray.find((pic) => pic.id === id));
     } else {
-      setCurrentPic(searchedPicsArray.find((pic) => pic.id == id));
+      setCurrentPic(searchedPicsArray.find((pic) => pic.id === id));
     }
   }, []);
 

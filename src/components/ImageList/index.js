@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { createRef, useEffect, useState } from "react";
 import { fetchImages, fetchSearchedImages } from "../common/api";
 import { useImageDataDispatch, useImageDataState } from "../context/images";

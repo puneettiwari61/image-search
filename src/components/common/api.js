@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const fetchImages = (page) => {
-  const apiurl = `https://api.flickr.com/services/rest/?method=flickr.photos.search&tags=ice&api_key=434f8afdf77c5ff55356355f294e64af&per_page=25&page=${page}&format=json&nojsoncallback=1`;
+  const apiurl = `https://api.flickr.com/services/rest/?method=flickr.photos.search&tags=ice&api_key=${process.env.REACT_APP_FLICKR_SECRET_KEY}&per_page=25&page=${page}&format=json&nojsoncallback=1`;
 
   return axios.get(apiurl);
 };
@@ -11,7 +11,9 @@ export const fetchSearchedImages = (
   debouncedSearchTerm,
   isSearchTermChanged
 ) => {
-  const apiurl = `https://api.flickr.com/services/rest/?method=flickr.photos.search&tags=${debouncedSearchTerm}&api_key=434f8afdf77c5ff55356355f294e64af&per_page=25&page=${
+  const apiurl = `https://api.flickr.com/services/rest/?method=flickr.photos.search&tags=${debouncedSearchTerm}&api_key=${
+    process.env.REACT_APP_FLICKR_SECRET_KEY
+  }&per_page=25&page=${
     isSearchTermChanged ? 1 : page
   }&format=json&nojsoncallback=1`;
 
